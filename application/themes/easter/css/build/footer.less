@@ -1,0 +1,28 @@
+footer#footer-theme {
+
+  a {
+    color: @footer-link-color;
+    &:hover {
+      color: @footer-link-hover-color;
+    }
+  }
+
+  color: @footer-text-color;
+
+
+  section {
+    border-top: 1px solid @footer-section-divider-color;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  section:first-child {
+    background-color: @footer-top-background-color;
+  }
+
+  section:last-child {
+    padding-bottom: 30px;
+    background-color: @footer-bottom-background-color;
+  }
+
+}
