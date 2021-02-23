@@ -15,7 +15,7 @@ files/tmp/*
 !/application/files/index.html
 
 # ignore application config
-/application/config/*
+/application/config
 
 # ignore updates folder
 /updates/*
