@@ -18,7 +18,7 @@ files/tmp/*
 /application/config
 
 # ignore updates folder
-/updates/*
+/updates
 
 # ignore sitemap.xml
 /sitemap.xml
