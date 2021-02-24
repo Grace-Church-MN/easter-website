@@ -54,6 +54,16 @@ div.ccm-page {
     }
   }
 
+  .full-height {
+    height: 100vh;
+  }
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   div[data-container=block] {
     div.container:last-child {
       padding-bottom: 0px;
@@ -71,6 +81,29 @@ div.ccm-page {
     hr {
       margin-top: @line-height-computed;
       margin-bottom: @line-height-computed;
+    }
+  }
+
+  .image-center-responsive {
+    width: 100%;
+    picture {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 50%;
+        @media (max-width: 992px) {
+          & {
+            width: 65%;
+          }
+        }
+        @media (max-width: 768px) {
+          & {
+            width: 80%;
+          }
+        }
+      }
     }
   }
 
