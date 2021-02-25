@@ -12,20 +12,29 @@
   padding-left: 0; // Override default ul/ol
   margin-bottom: 0;
   list-style: none;
+  text-align: end;
   &:extend(.clearfix all);
 
   > li {
     position: relative;
-    display: block;
+    display: inline-block;
+    color: @header-navigation-type-color;
+    font-size: @header-navigation-type-font-size;
+    font-weight: @header-navigation-type-font-weight;
 
     > a {
       position: relative;
       display: block;
       padding: @nav-link-padding;
+      color: @header-navigation-type-color;
+      font-size: @header-navigation-type-font-size;
+      font-weight: @header-navigation-type-font-weight;
+      transition: color 0.3s linear 0.1s;
       &:hover,
       &:focus {
+        color: @header-navigation-hover-color;
         text-decoration: none;
-        background-color: @nav-link-hover-bg;
+        background-color: @header-navigation-menu-background-hover-color;
       }
     }
 
