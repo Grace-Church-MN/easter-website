@@ -24,6 +24,7 @@ db.collection("forms").doc("vo887dEdCz5hCQzbf5ns")
 	currentValues = doc.data();
 	parseEvents();
 	processEvents();
+	getCount();
 	clearInterval(pollingData);
 	pollingData = setInterval(function() { processEvents(); }, 1000);
 });
@@ -89,7 +90,6 @@ function getNextEvent(time) {
 }
 
 function setServiceTime(){
-
 	let disabled = false;
 	select = document.getElementById('ServiceTime');
 	let set = `<option id="optionDisabled" disabled selected value=""></option>`;
@@ -118,7 +118,8 @@ function getCount() {
 	if(document.getElementById('Count').value && document.getElementById('ServiceTime').value != "") {
 		let newdate = moment(list.get(document.getElementById('ServiceTime').value).time).format() + "_" + list.get(document.getElementById('ServiceTime').value).name;
 		maxSpots = ((currentValues[newdate] <= rawEventsData.maxSpots) ? currentValues[newdate] : rawEventsData.maxSpots);
-		setMaxSpots();
+		let count = document.getElementById('Count');
+		count.max = maxSpots;
 
 		let val = 0;
 		if (document.getElementById('Campus').value == "CH") {
@@ -136,13 +137,6 @@ function getCount() {
 	} else {
 		document.getElementById('countMessage').innerHTML = 'Please select a location and service time to see available spots.';
 	}
-}
-
-function setMaxSpots(){
-
-	let count = document.getElementById('Count');
-	count.max = maxSpots;
-
 }
 
 function submit(){
