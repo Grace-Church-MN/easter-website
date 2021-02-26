@@ -1,0 +1,7 @@
+.message{
+	padding: 1em 0em 1em 0em;
+}
+.submit{
+	padding: 1em 0em 1em 0em;
+	justify-content: flex-end;
+}

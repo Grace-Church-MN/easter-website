@@ -17,21 +17,22 @@ class Controller extends BlockController
 	public function on_start(){
 		$al = \Concrete\Core\Asset\AssetList::getInstance();
 		$al->register(
-			'javascript', 'mobiscroll.js', 'blocks/reservation_form/js/mobiscroll.javascript.lite.min.js',
+			'javascript', 'mobiscroll', 'blocks/reservation_form/js/mobiscroll.javascript.lite.min.js',
 		);
 		$al->register(
 			'javascript', 'moment.js', 'blocks/reservation_form/js/moment.js',
 		);
 
-		//$al->registerGroup('reservationFormAssets', array(
-		//	array('javascript', 'mobiscroll'),
-		//	array('javascript', 'moment.js')
-		//));
+		$al->registerGroup('reservationFormAssets', array(
+			array('javascript', 'mobiscroll'),
+			array('javascript', 'moment.js'),
+			array('javascript', 'jquery')
+		));
 	}
 	public function getBlockTypeName(){
 		return t('Reservation Form');
 	}
-//	public function registerViewAssets($outputContent = '') {
-//		$this->requireAsset('reservationFormAssets');
-//	}
+	public function registerViewAssets($outputContent = '') {
+		$this->requireAsset('reservationFormAssets');
+	}
 }

@@ -1,41 +1,31 @@
 const db = firebase.firestore();
-let form = null;
 let list = new Map();
 let availableSpots = "";
-let maxSpots = 0;
-let confirm = false;
-let response = null;
-let verified = false;
+let maxSpots = 1;
 let rawEventsData = {maxSpots:1};
-let serviceLength = 3600;
 let current = null;
 let currentValues = {};
 let pollingData = null;
-let mbscOptions = {
-	theme: 'mobiscroll'
-};
-/*let timeOrder = (a: KeyValue<string,any>, b: KeyValue<string,any>): number => {
-	if (a.value.time != b.value.time) {
-		return a.value.time - b.value.time;
-	}
-}*/
+
+// TODO: on change of campus reset ServiceTime.
+// TODO: on change of service time or campus reset count.
+// TODO: form and email verrification.
 
 
 
 db.collection("reservation").doc("settings")
 .onSnapshot((doc) => {
 	rawEventsData = doc.data();
-	console.log(rawEventsData);
 	parseEvents();
 	processEvents();
-
 });
 db.collection("forms").doc("vo887dEdCz5hCQzbf5ns")
 .onSnapshot((doc) => {
 	currentValues = doc.data();
-	console.log(currentValues);
 	parseEvents();
 	processEvents();
+	clearInterval(pollingData);
+	pollingData = setInterval(function() { processEvents(); }, 1000);
 });
 
 
@@ -59,21 +49,19 @@ function parseEvents() {
 		}
 
 		let newdate = moment(event.time).format() + "_" + event.name;
-		//if(form.value.ServiceTime && form.value.ServiceTime.ID == event.ID){
-		//	if(document.getElementById('Count').value >= currentValues[newdate]) {form.value.Count = currentValues[newdate];}
-		//}
+		if(document.getElementById('ServiceTime').value != "" && document.getElementById('ServiceTime').value == event.ID){
+			if(document.getElementById('Count').value >= currentValues[newdate]) {document.getElementById('Count').value = currentValues[newdate];}
+		}
 		if(currentValues[newdate] <= 0) {
 			event.hidden = true;
-	//		if(form.value.ServiceTime && form.value.ServiceTime.ID == event.ID) resetServiceTime();
+			if(document.getElementById('ServiceTime').value != "" && document.getElementById('ServiceTime').value == event.ID) resetServiceTime();
 		}
-
 		// Add event to list
 		list.set(event.ID, event);
 	});
 	current = getNextEvent(current);
-	console.log(current);
-	console.log(list);
 }
+
 function resetServiceTime(){
 
 }
@@ -90,8 +78,8 @@ function processEvents(){
 	}
 	setServiceTime();
 }
+
 function getNextEvent(time) {
-	console.log(list);
 	if (list && list.size > 0) {
 		let items = [...list.entries()].sort((a, b) => { return a[1].time.getTime() - b[1].time.getTime(); });
 		return items[0][0];
@@ -99,40 +87,88 @@ function getNextEvent(time) {
 		return null;
 	}
 }
-function setServiceTime(){
-	select = document.getElementById('ServiceTime');
-	let set = `<option disabled selected value></option>`;
-	list.forEach((time, i) => {
-		console.log(time.hidden, i);
-		if(document.getElementById('Campus').value != "" && time.name.includes(document.getElementById('Campus').value)){
-			set += `<option value='${time.ID}'>${(time.hidden) ? '(Full) ' : ''} ${time.service} - ${moment(time.time).format('MMM D, h:mm a')}</option>`
-		}
 
+function setServiceTime(){
+
+	let disabled = false;
+	select = document.getElementById('ServiceTime');
+	let set = `<option id="optionDisabled" disabled selected value=""></option>`;
+	list.forEach((time, i) => {
+		if(document.getElementById('Campus').value != "" && time.name.includes(document.getElementById('Campus').value)){
+			disabled = true;
+			if(time.hidden){
+				set += `<option disabled value='${time.ID}'>${(time.hidden) ? '(Full) ' : ''} ${time.service} - ${moment(time.time).format('MMM D')} at ${moment(time.time).format('h:mm A')}</option>`
+			} else{
+				set += `<option value='${time.ID}'>${(time.hidden) ? '(Full) ' : ''} ${time.service} - ${moment(time.time).format('MMM D')} at ${moment(time.time).format('h:mm A')}</option>`
+			}
+		} else {
+		}
 	});
-	console.log(set);
+	if(disabled){
+		select.disabled = false;
+	} else {
+		select.disabled = true;
+	}
+
 	select.innerHTML = set;
+	getCount();
 }
+
 function getCount() {
-/*	if(form.value.ServiceTime != null) {
-		let newdate = moment(form.value.ServiceTime.time).format() + "_" + form.value.ServiceTime.name;
-		maxSpots = (currentValues[newdate] <= rawEventsData.maxSpots) ? currentValues[newdate] : rawEventsData.maxSpots;
-		let val: number;
-		if (form.value.Campus == "CH") {
+	if(document.getElementById('Count').value && document.getElementById('ServiceTime').value != "") {
+		let newdate = moment(list.get(document.getElementById('ServiceTime').value).time).format() + "_" + list.get(document.getElementById('ServiceTime').value).name;
+		maxSpots = ((currentValues[newdate] <= rawEventsData.maxSpots) ? currentValues[newdate] : rawEventsData.maxSpots);
+		setMaxSpots();
+
+		let val = 0;
+		if (document.getElementById('Campus').value == "CH") {
 			val = rawEventsData.CHCapacity;
-		} else if (form.value.Campus == "EP") {
+		} else if (document.getElementById('Campus').value == "EP") {
 			val = rawEventsData.EPCapacity;
-		} else if (form.value.Campus == "Chapel") {
+		} else if (document.getElementById('Campus').value == "Chapel") {
 			val = rawEventsData.ChapelCapacity;
 		}
 		availableSpots = ((currentValues[newdate] / val * 100) < 6) ? currentValues[newdate] : Math.floor(currentValues[newdate] / val * 100) + "%";
-	}*/
+	}
+
+	if(document.getElementById('ServiceTime').value != "" && document.getElementById('Campus').value != "") {
+		document.getElementById('countMessage').innerHTML = `${(availableSpots.toString().includes('%')) ? 'Available Capacity:' : 'Available Spots:'} ${availableSpots}`;
+	} else {
+		document.getElementById('countMessage').innerHTML = 'Please select a location and service time to see available spots.';
+	}
 }
 
+function setMaxSpots(){
+
+	let count = document.getElementById('Count');
+	count.max = maxSpots;
+
+}
 
 function submit(){
-	console.log(document.getElementById('Name').value);
-	console.log(document.getElementById('Email').value);
-	console.log(document.getElementById('Campus').value);
-	console.log(document.getElementById('ServiceTime').value);
-	console.log(document.getElementById('Count').value);
+	if(document.getElementById('Name').value != "" && document.getElementById('Email').value != "" && document.getElementById('Campus').value != "" && document.getElementById('ServiceTime').value != ""){
+		let campus = "";
+		let serviceTime = list.get(document.getElementById('ServiceTime').value);
+		let email = document.getElementById('Email').value.trim();
+
+		if (document.getElementById('Campus').value == "CH") {
+			campus = "Chaska";
+		} else if (document.getElementById('Campus').value == "EP") {
+			campus = "Eden Prairie";
+		} else { campus = "Chapel"; }
+
+		serviceTime.time = serviceTime.time.getTime() / 1000;
+
+		let send = {Name: document.getElementById('Name').value, Email: email, Campus:campus, ServiceTime: serviceTime, Count: document.getElementById('Count').value};
+
+		$.post('http://localhost:5001/grace-church-161321/us-central1/api/forms/submit/vo887dEdCz5hCQzbf5ns', send).done(function( res ) {
+			console.log(res);
+		});
+
+	} else {
+		mobiscroll.alert({
+			title: 'Error',
+			message: 'Please fill out all require fields'
+		});
+	}
 }
