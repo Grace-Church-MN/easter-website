@@ -12,7 +12,7 @@ if (count($rows) > 0) {
 		}
 	}
 ?>
-	<ul class="nav">
+	<ul class="nav" id="manual-nav">
 <?php
 	foreach ($rows as $row) {
 		$title = null;
