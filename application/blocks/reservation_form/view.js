@@ -32,11 +32,13 @@ db.collection("forms").doc("vo887dEdCz5hCQzbf5ns")
 
 function parseEvents() {
 	let current = new Date();
+	let reset = false;
 	const events = JSON.parse(JSON.stringify(rawEventsData));
 	events.times.forEach(event => {
 		// If event is disabled, don't add it to the list
 		if (!event.disabled) {
 			if (list.get(event.ID)) list.delete(event.ID);
+			reset = true;
 			return;
 		}
 
@@ -46,6 +48,7 @@ function parseEvents() {
 		// If event is already over, don't include it
 		if (current > new Date(event.end.getTime())) {
 			if (list.get(event.ID)) list.delete(event.ID);
+			reset = true;
 			return;
 		}
 
@@ -55,16 +58,19 @@ function parseEvents() {
 		}
 		if(currentValues[newdate] <= 0) {
 			event.hidden = true;
-			if(document.getElementById('ServiceTime').value != "" && document.getElementById('ServiceTime').value == event.ID) resetServiceTime();
+			if(document.getElementById('ServiceTime').value != "" && document.getElementById('ServiceTime').value == event.ID) {setTimeout(function(){ setServiceTime() }, 500);};
 		}
 		// Add event to list
 		list.set(event.ID, event);
 	});
 	current = getNextEvent(current);
+	if(reset == true){
+		setServiceTime();
+	}
 }
 
 function resetServiceTime(){
-
+	console.log('reset');
 }
 
 function processEvents(){
@@ -77,7 +83,6 @@ function processEvents(){
 	} else {
 		current = getNextEvent(time);
 	}
-	setServiceTime();
 }
 
 function getNextEvent(time) {
