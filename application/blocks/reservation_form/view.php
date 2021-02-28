@@ -12,13 +12,13 @@
 			<div class="mbsc-col">
 				<label>
 					Name
-					<input mbsc-input id="Name" required />
+					<input mbsc-input id="Name" onKeyup="validateField(this, 'Name is required.')" />
 				</label>
 			</div>
 			<div class="mbsc-col">
 				<label>
 					Email
-					<input mbsc-input id="Email" required />
+					<input mbsc-input id="Email" onKeyup="validateField(this, 'Email is required.')" />
 				</label>
 			</div>
 		</div>
@@ -26,7 +26,7 @@
 			<div class="mbsc-col">
 				<label>
 					Location
-					<select id="Campus" onChange="setServiceTime()" required>
+					<select id="Campus" onChange="setServiceTime(), validateField(this, 'Location is required.')">
 						<option disabled selected value></option>
 						<option value="Chapel">Eden Prairie Chapel</option>
 						<option value="CH">Chaska Audtiorium</option>
@@ -37,7 +37,7 @@
 			<div class="mbsc-col">
 				<label>
 					Service Time
-					<select id="ServiceTime" onChange="getCount()" required>
+					<select id="ServiceTime" onChange="getCount(), validateField(this, 'Service Time is required.')">
 
 					</select>
 				</label>
