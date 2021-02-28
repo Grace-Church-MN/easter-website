@@ -17,7 +17,7 @@ class Controller extends BlockController
 	public function on_start(){
 		$al = \Concrete\Core\Asset\AssetList::getInstance();
 		$al->register(
-			'javascript', 'mobiscroll', 'blocks/reservation_form/js/mobiscroll.javascript.lite.min.js',
+			'javascript', 'mobiscroll', 'blocks/reservation_form/js/mobiscroll.javascript.min.js',
 		);
 		$al->register(
 			'javascript', 'moment.js', 'blocks/reservation_form/js/moment.js',

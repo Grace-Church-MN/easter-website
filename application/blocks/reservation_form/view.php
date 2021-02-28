@@ -2,12 +2,6 @@
 
 <div mbsc-form id="reservation">
 	<div class="mbsc-grid">
-		<div class="message mbsc-row">
-			<div class="mbsc-col">
-				<text>Please reserve your seat for the Good Friday or Easter services you plan attend by filling out the form below. If you are feeling any symptoms or have been exposed to COVID-19, we ask that you remain home and stream the service at <a href="https://grace.live" target="_new">www.grace.live</a>.</text>
-			</div>
-		</div>
-
 		<div class="mbsc-row">
 			<div class="mbsc-col">
 				<label>
@@ -49,11 +43,6 @@
 					Number of people in your party?
 					<span class="mbsc-desc" id="countMessage"></span>
 				</input>
-			</div>
-		</div>
-		<div class="mbsc-row">
-			<div class="mbsc-col">
-				<text><small><i>Notice: While Grace Church has been very careful to follow the CDC guidelines to provide a safe environment, we cannot guarantee you or those in your party will not contract COVID-19. Thank you for doing your part to help prevent the spread of coronavirus.</i></small></text>
 			</div>
 		</div>
 
