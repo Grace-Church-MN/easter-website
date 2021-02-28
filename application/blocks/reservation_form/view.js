@@ -208,7 +208,7 @@ function submit(){
 
 		let send = {Name: document.getElementById('Name').value, Email: email, Campus:campus, ServiceTime: serviceTime, Count: document.getElementById('Count').value};
 
-		$.post('http://localhost:5001/grace-church-161321/us-central1/api/forms/submit/vo887dEdCz5hCQzbf5ns', send).done(function( res ) {
+		$.post('https://us-central1-grace-church-161321.cloudfunctions.net/api/forms/submit/vo887dEdCz5hCQzbf5ns', send).done(function( res ) {
 			console.log(res);
 		});
 
