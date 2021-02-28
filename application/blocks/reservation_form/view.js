@@ -209,7 +209,14 @@ function submit(){
 		let send = {Name: document.getElementById('Name').value, Email: email, Campus:campus, ServiceTime: serviceTime, Count: document.getElementById('Count').value};
 
 		$.post('https://us-central1-grace-church-161321.cloudfunctions.net/api/forms/submit/vo887dEdCz5hCQzbf5ns', send).done(function( res ) {
-			console.log(res);
+			if(res.success){
+				window.location.href = '/easter-website/index.php/reserve-spot/confirm';
+			} else {
+				mobiscroll.alert({
+					title: 'Error',
+					message: 'An unknown error occurred. Please try again.'
+				});
+			}
 		});
 
 	} else {
