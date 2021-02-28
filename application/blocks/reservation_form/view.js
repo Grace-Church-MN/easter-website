@@ -144,8 +144,56 @@ function getCount() {
 	}
 }
 
+function validateField(field, message){
+	if(field.value != "" && message == "Email is required."){
+		let r = new RegExp('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-. ]+$');
+		if(field.value.match(r)) {
+			clearErrorState(field);
+			return true;
+		} else {
+			addErrorState(field, 'Email is invalid.');
+		}
+	} else if(field.value == ""){
+		addErrorState(field, message);
+	} else {
+		clearErrorState(field);
+		return true;
+	}
+}
+
+function addErrorState(field, message) {
+	let parent = field.parentNode;
+	errorMsg = parent.querySelector('.mbsc-err-msg');
+	parent.parentNode.classList.add('mbsc-err');
+	if (!errorMsg) {
+		errorMsg = document.createElement('span');
+		errorMsg.className = 'mbsc-err-msg';
+		parent.appendChild(errorMsg);
+	}
+	errorMsg.innerHTML = message;
+}
+
+function clearErrorState(field) {
+	let parent = field.parentNode;
+	errorMsg = parent.querySelector('.mbsc-err-msg');
+
+	parent.parentNode.classList.remove('mbsc-err');
+	if (errorMsg) {
+		parent.removeChild(errorMsg);
+	}
+}
+
 function submit(){
-	if(document.getElementById('Name').value != "" && document.getElementById('Email').value != "" && document.getElementById('Campus').value != "" && document.getElementById('ServiceTime').value != ""){
+	let nameValid = false;
+	let emailValid = false;
+	let locationValid = false;
+	let serviceValid = false;
+	if(validateField(document.getElementById('Name'), 'Name is required.')) nameValid = true;
+	if(validateField(document.getElementById('Email'), 'Email is required.')) emailValid = true;
+	if(validateField(document.getElementById('Campus'), 'Location is required.')) locationValid = true;
+	if(validateField(document.getElementById('ServiceTime'), 'Service Time is required.')) serviceValid = true;
+	
+	if(nameValid && emailValid && locationValid && serviceValid){
 		let campus = "";
 		let serviceTime = list.get(document.getElementById('ServiceTime').value);
 		let email = document.getElementById('Email').value.trim();
@@ -160,7 +208,7 @@ function submit(){
 
 		let send = {Name: document.getElementById('Name').value, Email: email, Campus:campus, ServiceTime: serviceTime, Count: document.getElementById('Count').value};
 
-		$.post('http://localhost:5001/grace-church-161321/us-central1/api/forms/submit/vo887dEdCz5hCQzbf5ns', send).done(function( res ) {
+		$.post('https://us-central1-grace-church-161321.cloudfunctions.net/api/forms/submit/vo887dEdCz5hCQzbf5ns', send).done(function( res ) {
 			console.log(res);
 		});
 
