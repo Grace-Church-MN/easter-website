@@ -39,7 +39,7 @@
 		</div>
 		<div class="mbsc-row">
 			<div class="mbsc-col">
-				<input id="Count" mbsc-stepper value="1" min="1" step="1" >
+				<input id="Count" mbsc-stepper value="1" min="1" max="1" step="1" >
 					Number of people in your party?
 					<span class="mbsc-desc" id="countMessage"></span>
 				</input>

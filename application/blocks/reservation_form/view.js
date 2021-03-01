@@ -54,7 +54,7 @@ function parseEvents() {
 
 		let newdate = moment(event.time).format() + "_" + event.name;
 		if(document.getElementById('ServiceTime').value != "" && document.getElementById('ServiceTime').value == event.ID){
-			if(document.getElementById('Count').value >= currentValues[newdate]) {document.getElementById('Count').value = currentValues[newdate];}
+			if(document.getElementById('Count').value >= currentValues[newdate]) {document.getElementById('Count').value = currentValues[newdate]; mobiscroll.stepper('#Count').max = currentValues[newdate];}
 		}
 		if(currentValues[newdate] <= 0) {
 			event.hidden = true;
@@ -125,6 +125,7 @@ function getCount() {
 		maxSpots = ((currentValues[newdate] <= rawEventsData.maxSpots) ? currentValues[newdate] : rawEventsData.maxSpots);
 		let count = document.getElementById('Count');
 		count.max = maxSpots;
+		mobiscroll.stepper('#Count').max = maxSpots;
 
 		let val = 0;
 		if (document.getElementById('Campus').value == "CH") {
