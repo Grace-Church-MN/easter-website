@@ -211,7 +211,7 @@ function submit(){
 
 		$.post('https://us-central1-grace-church-161321.cloudfunctions.net/api/forms/submit/vo887dEdCz5hCQzbf5ns', send).done(function( res ) {
 			if(res.success){
-				window.location.href = '/easter-website/index.php/reserve-spot/confirm';
+				window.location.href = reservationFormRedirectURL;
 			} else {
 				mobiscroll.alert({
 					title: 'Error',
