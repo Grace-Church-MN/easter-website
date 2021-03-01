@@ -1,4 +1,22 @@
-<?php defined('C5_EXECUTE') or die(_("Access Denied.")) ?>
+<?php 
+	defined('C5_EXECUTE') or die(_("Access Denied."));
+
+	$page = Page::getCurrentPage();
+	$pageID = $page->getCollectionID();
+	$pl = new \Concrete\Core\Page\PageList();
+	$pl->filterByParentID($pageID);  // Add parent page ID here.
+	$pages = $pl->getResults();
+	$n = 0;
+	foreach($pages as $page) {
+	    $n++;
+	    if($n == 1) {
+			 $path = $page->getCollectionLink();
+			 echo $path;
+	    }
+	}
+
+	echo "<script type=\"text/javascript\">var reservationFormRedirectURL = \"".$path."\";</script>"
+?>
 
 <div mbsc-form id="reservation">
 	<div class="mbsc-grid">
