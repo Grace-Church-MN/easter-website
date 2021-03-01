@@ -56,16 +56,22 @@
 				</div>
 			</div>
 			<div class="mbsc-row">
-				<div class="mbsc-col">
-					<input id="Count" mbsc-stepper value="1" min="1" max="1" step="1" >
-						Number of people in your party?
-						<span class="mbsc-desc" id="countMessage"></span>
-					</input>
+				<div class="mbsc-col-12">
+					<label>
+						<input id="Count" mbsc-stepper value="1" min="1" max="1" step="1" >
+							Number of people in your party?
+							<span class="mbsc-desc" id="countMessage"></span>
+						</input>
+					</label>
 				</div>
 			</div>
 
 			<div class="submit mbsc-row">
-				<button mbsc-button id="submitButton" type="submit" onClick="submit()">Submit</button>
+				<div class="mbsc-col-12">
+					<label>
+						<button mbsc-button id="submitButton" type="submit" onClick="submit()">Submit</button>
+					</label>
+				</div>
 			</div>
 		</div>
 	</div>
