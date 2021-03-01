@@ -10,7 +10,7 @@ let pollingData = null;
 mobiscroll.select('#ServiceTime', {
 	touchUi: false
 });
-
+document.getElementById('ServiceTime').disabled = true;
 
 db.collection("reservation").doc("settings")
 .onSnapshot((doc) => {
