@@ -64,7 +64,7 @@
 		</div>
 
 		<div class="submit mbsc-row">
-			 <button mbsc-button type="submit" onClick="submit()">Submit</button>
+			 <button mbsc-button id="submitButton" type="submit" onClick="submit()">Submit</button>
 		</div>
 	</div>
 </div>

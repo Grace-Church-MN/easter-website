@@ -194,6 +194,7 @@ function submit(){
 	if(validateField(document.getElementById('ServiceTime'), 'Service Time is required.')) serviceValid = true;
 
 	if(nameValid && emailValid && locationValid && serviceValid){
+		document.getElementById('submitButton').disabled = true;
 		let campus = "";
 		let serviceTime = list.get(document.getElementById('ServiceTime').value);
 		let email = document.getElementById('Email').value.trim();
