@@ -1,6 +1,24 @@
 <?php 
 	defined('C5_EXECUTE') or die(_("Access Denied."));
 
+	function build_http_query($query, $allowed_keys) {
+		$query_array = [];
+	
+		$i = 0;
+		foreach($query as $key => $value) {
+			$i++;
+			if (in_array($key, $allowed_keys)) {
+				$query_array[] = urlencode( $key ) . '=' . urlencode( $value );
+				if (count($query) > $i) $query_array[] = '&';
+			}
+		}
+
+		if (count($query_array) > 0) array_unshift($query_array, '?');
+	
+		return implode('', $query_array);
+	}
+
+	$allowed_query_params = ["utm_source", "utm_medium", "utm_campaign"];
 	$page = Page::getCurrentPage();
 	$pageID = $page->getCollectionID();
 	$pl = new \Concrete\Core\Page\PageList();
@@ -14,7 +32,7 @@
 	    }
 	}
 
-	echo "<script type=\"text/javascript\">var reservationFormRedirectURL = \"".$path."\";</script>"
+	echo "<script type=\"text/javascript\">var reservationFormRedirectURL = \"".$path.build_http_query($_GET, $allowed_query_params)."\";</script>"
 ?>
 
 <div mbsc-form id="reservation">
