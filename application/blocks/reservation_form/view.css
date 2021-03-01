@@ -6,6 +6,16 @@
 	justify-content: flex-end;
 }
 
+.mbsc-mobiscroll .mbsc-sc-whl-l {
+	border-top: none !important;
+	border-bottom: none !important;
+}
+
+.mbsc-mobiscroll.mbsc-grace-church.mbsc-btn {
+	padding: 0.6em 2em 0.5em 2em;
+	border-radius: 2em;
+}
+
 @media only screen and (max-width: 576px) {
 	.mbsc-mobiscroll.mbsc-ltr.mbsc-stepper-cont {
 		font-size: 0.9em;

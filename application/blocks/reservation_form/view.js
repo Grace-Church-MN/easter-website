@@ -8,11 +8,12 @@ let currentValues = {};
 let pollingData = null;
 
 var mobiscrollOpts = {
-    touchUi: false
+	display: 'bubble',
+	touchUi: false,
+	showOverlay: false
 }
 mobiscroll.settings = {
-    theme: 'mobiscroll',
-    themeVariant: 'grace-church'
+    theme: 'grace-church'
 };
 mobiscroll.select('#Campus', mobiscrollOpts);
 mobiscroll.select('#ServiceTime', mobiscrollOpts);
@@ -152,7 +153,7 @@ function getCount() {
 
 function validateField(field, message){
 	if(field.value != "" && message == "Please enter a valid email address"){
-		let r = new RegExp('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-. ]+$');
+		let r = new RegExp("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$");
 		if(field.value.match(r)) {
 			clearErrorState(field);
 			return true;
