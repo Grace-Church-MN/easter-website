@@ -5,3 +5,12 @@
 	padding: 1em 0em 1em 0em;
 	justify-content: flex-end;
 }
+
+@media only screen and (max-width: 576px) {
+	.mbsc-mobiscroll.mbsc-ltr.mbsc-stepper-cont {
+		font-size: 0.9em;
+	}
+	.mbsc-mobiscroll.mbsc-ltr.mbsc-stepper.mbsc-segmented {
+		font-size: 0.9em;
+	}
+}
