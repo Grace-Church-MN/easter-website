@@ -7,9 +7,15 @@ let current = null;
 let currentValues = {};
 let pollingData = null;
 
-mobiscroll.select('#ServiceTime', {
-	touchUi: false
-});
+var mobiscrollOpts = {
+    touchUi: false
+}
+mobiscroll.settings = {
+    theme: 'mobiscroll',
+    themeVariant: 'grace-church'
+};
+mobiscroll.select('#Campus', mobiscrollOpts);
+mobiscroll.select('#ServiceTime', mobiscrollOpts);
 document.getElementById('ServiceTime').disabled = true;
 
 db.collection("reservation").doc("settings")
@@ -69,7 +75,7 @@ function parseEvents() {
 }
 
 function resetServiceTime(){
-	mobiscroll.select("#ServiceTime").refresh();
+	mobiscroll.select("#ServiceTime", mobiscrollOpts).refresh();
 }
 
 function processEvents(){

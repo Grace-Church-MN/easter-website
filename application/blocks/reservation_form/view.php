@@ -39,9 +39,9 @@
 					Location
 					<select id="Campus" onChange="setServiceTime(), resetServiceTime(), validateField(this, 'Location is required.')">
 						<option disabled selected value></option>
-						<option value="EP">Eden Prairie - Audtiorium</option>
+						<option value="EP">Eden Prairie - Auditorium</option>
 						<option value="Chapel">Eden Prairie - Chapel</option>
-						<option value="CH">Chaska - Audtiorium</option>
+						<option value="CH">Chaska - Auditorium</option>
 					</select>
 				</label>
 			</div>
