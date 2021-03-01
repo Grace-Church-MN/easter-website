@@ -11,7 +11,6 @@
 	    $n++;
 	    if($n == 1) {
 			 $path = $page->getCollectionLink();
-			 echo $path;
 	    }
 	}
 
