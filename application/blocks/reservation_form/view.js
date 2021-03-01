@@ -151,7 +151,7 @@ function getCount() {
 }
 
 function validateField(field, message){
-	if(field.value != "" && message == "Email is required."){
+	if(field.value != "" && message == "Please enter a valid email address"){
 		let r = new RegExp('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-. ]+$');
 		if(field.value.match(r)) {
 			clearErrorState(field);
@@ -194,10 +194,10 @@ function submit(){
 	let emailValid = false;
 	let locationValid = false;
 	let serviceValid = false;
-	if(validateField(document.getElementById('Name'), 'Name is required.')) nameValid = true;
-	if(validateField(document.getElementById('Email'), 'Email is required.')) emailValid = true;
-	if(validateField(document.getElementById('Campus'), 'Location is required.')) locationValid = true;
-	if(validateField(document.getElementById('ServiceTime'), 'Service Time is required.')) serviceValid = true;
+	if(validateField(document.getElementById('Name'), 'Please enter your name')) nameValid = true;
+	if(validateField(document.getElementById('Email'), 'Please enter a valid email address')) emailValid = true;
+	if(validateField(document.getElementById('Campus'), 'Please select a location')) locationValid = true;
+	if(validateField(document.getElementById('ServiceTime'), 'Please select a service time')) serviceValid = true;
 
 	if(nameValid && emailValid && locationValid && serviceValid){
 		document.getElementById('submitButton').disabled = true;
