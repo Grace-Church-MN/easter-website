@@ -7,10 +7,9 @@ let current = null;
 let currentValues = {};
 let pollingData = null;
 
-// TODO: on change of campus reset ServiceTime.
-// TODO: on change of service time or campus reset count.
-// TODO: form and email verrification.
-
+mobiscroll.select('#ServiceTime', {
+	touchUi: false
+});
 
 
 db.collection("reservation").doc("settings")
@@ -58,7 +57,7 @@ function parseEvents() {
 		}
 		if(currentValues[newdate] <= 0) {
 			event.hidden = true;
-			if(document.getElementById('ServiceTime').value != "" && document.getElementById('ServiceTime').value == event.ID) {setTimeout(function(){ setServiceTime() }, 500);};
+			if(document.getElementById('ServiceTime').value != "" && document.getElementById('ServiceTime').value == event.ID) {setTimeout(function(){ setServiceTime(); resetServiceTime(); }, 500);};
 		}
 		// Add event to list
 		list.set(event.ID, event);
@@ -70,7 +69,7 @@ function parseEvents() {
 }
 
 function resetServiceTime(){
-	console.log('reset');
+	mobiscroll.select("#ServiceTime").refresh();
 }
 
 function processEvents(){
@@ -193,7 +192,7 @@ function submit(){
 	if(validateField(document.getElementById('Email'), 'Email is required.')) emailValid = true;
 	if(validateField(document.getElementById('Campus'), 'Location is required.')) locationValid = true;
 	if(validateField(document.getElementById('ServiceTime'), 'Service Time is required.')) serviceValid = true;
-	
+
 	if(nameValid && emailValid && locationValid && serviceValid){
 		let campus = "";
 		let serviceTime = list.get(document.getElementById('ServiceTime').value);

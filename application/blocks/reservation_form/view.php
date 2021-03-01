@@ -20,7 +20,7 @@
 			<div class="mbsc-col">
 				<label>
 					Location
-					<select id="Campus" onChange="setServiceTime(), validateField(this, 'Location is required.')">
+					<select id="Campus" onChange="setServiceTime(), resetServiceTime(), validateField(this, 'Location is required.')">
 						<option disabled selected value></option>
 						<option value="EP">Eden Prairie - Audtiorium</option>
 						<option value="Chapel">Eden Prairie - Chapel</option>
