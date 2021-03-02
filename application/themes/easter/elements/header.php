@@ -13,7 +13,7 @@ $this->inc('elements/header_top.php');
                 $a->display();
                 ?>
             </div>
-            <div class="<?php echo ($displayThirdColumn) ? 'col-sm-5 col-xs-6' : 'col-sm-8 col-xs-6' ?>">
+            <div class="col-sm-8 col-xs-6 header-nav">
                 <?php
                 $a = new GlobalArea('Header Navigation');
                 $a->display();

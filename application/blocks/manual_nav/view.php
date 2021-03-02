@@ -33,6 +33,11 @@ if (count($rows) > 0) {
 	}
 ?>
 	</ul>
+	<div id="menu-button" class="hamburger hamburger--slider">
+		<div class="hamburger-box">
+			<div class="hamburger-inner"></div>
+		</div>
+	</div>
 <?php
 } else {
 ?>

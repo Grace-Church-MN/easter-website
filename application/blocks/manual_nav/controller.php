@@ -32,6 +32,15 @@ class Controller extends BlockController
 
     public function on_start()
     {
+        $al = \Concrete\Core\Asset\AssetList::getInstance();
+		$al->register(
+			'css', 'hamburgers', 'blocks/manual_nav/css/hamburgers.min.css',
+		);
+
+		$al->registerGroup('manualNavAssets', array(
+			array('css', 'hamburgers')
+        ));
+        
         // Set font awesome icons
         $classes = $this->getIconClasses();
         $icons = ['' => t('Choose Icon')];
@@ -48,6 +57,7 @@ class Controller extends BlockController
         $this->requireAsset('core/sitemap');
         $this->requireAsset('redactor');
         $this->requireAsset('css', 'font-awesome');
+        $this->requireAsset('manualNavAssets');
     }
 
     public function getSearchableContent()
