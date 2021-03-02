@@ -46,7 +46,7 @@ function parseEvents() {
 	const events = JSON.parse(JSON.stringify(rawEventsData));
 	events.times.forEach(event => {
 		// If event is disabled, don't add it to the list
-		if (!event.disabled) {
+		if (event.disabled) {
 			if (list.get(event.ID)) list.delete(event.ID);
 			reset = true;
 			return;
