@@ -25,7 +25,7 @@ if (count($rows) > 0) {
 		}
 ?>
 		<li class="<?php echo $row['class']; ?>">
-			<a href="<?php echo $row['linkURL']; ?>" <?php echo $row['openInNewWindow'] ? 'target="_blank"' : ''; ?>>
+			<a class="nav-link" href="<?php echo $row['linkURL']; ?>" <?php echo $row['openInNewWindow'] ? 'target="_blank"' : ''; ?>>
 				<?php echo h($title); ?>
 			</a>
 		</li>

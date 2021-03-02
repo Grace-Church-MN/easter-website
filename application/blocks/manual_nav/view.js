@@ -21,6 +21,7 @@
 		if (typeof(href) != "string") {
 			href.preventDefault();
 			href = $(this).attr("href");
+
 		}
 
 		var fromTop = 60;
@@ -41,6 +42,6 @@
 
 	scrollIfAnchor(window.location.hash);
 
-	$("body").on("click", "a", scrollIfAnchor);
+	$("body").on("click", "a.nav-link", scrollIfAnchor);
 
 })(window, $);
