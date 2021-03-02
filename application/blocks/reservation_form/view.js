@@ -131,12 +131,15 @@ function setFields(field){
 function setServiceTime(service){
 	serviceName = ((service == 'ES') ? 'Easter Sunday' : 'Good Friday');
 	serviceTime = ((service == 'ES') ? 'ServiceTimeEasterSunday' : 'ServiceTimeGoodFriday');
+	serviceMessage = ((service == 'ES') ? 'ServiceTimeLabelEasterSunday' : 'ServiceTimeLabelGoodFriday');
 	campus = ((service == 'ES') ? 'CampusEasterSunday' : 'CampusGoodFriday');
 	let disabled = false;
+	let serviceMessageValid = false;
 	select = document.getElementById(serviceTime);
 	let set = `<option id="optionDisabled" disabled selected value=""></option>`;
 	list.forEach((time, i) => {
 		if(document.getElementById(campus).value != "" && time.name.includes(document.getElementById(campus).value) && time.service == serviceName){
+			if(time.kids) serviceMessageValid = true;
 			disabled = true;
 			if(time.hidden){
 				set += `<option disabled value='${time.ID}'>${(time.hidden) ? '(Full) ' : ''} ${(moment(time.time).minute() == 0) ? (moment(time.time).format('ha')).slice(0, -1) : (moment(time.time).format('h:mma')).slice(0, -1)}${(time.kids) ? '*' : ''}</option>`
@@ -150,7 +153,11 @@ function setServiceTime(service){
 	} else {
 		select.disabled = true;
 	}
-
+	if(serviceMessageValid){
+		document.getElementById(serviceMessage).querySelector('.mbsc-label').innerHTML = "Service Time (*Kids Ministry Available for Ages 0-5)"
+	} else {
+		document.getElementById(serviceMessage).querySelector('.mbsc-label').innerHTML = "Service Time"
+	}
 	select.innerHTML = set;
 	getCount(service);
 }

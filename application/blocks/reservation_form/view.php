@@ -82,7 +82,7 @@
 						</label>
 					</div>
 					<div class="mbsc-col-12 mbsc-col-md-6">
-						<label>
+						<label id="ServiceTimeLabelEasterSunday">
 							Service Time
 							<select id="ServiceTimeEasterSunday" onChange="getCount('ES'), validateField(this, 'Please select a service time')">
 
@@ -117,7 +117,7 @@
 						</label>
 					</div>
 					<div class="mbsc-col-12 mbsc-col-md-6">
-						<label>
+						<label id="ServiceTimeLabelGoodFriday">
 							Service Time
 							<select id="ServiceTimeGoodFriday" onChange="getCount('GF'), validateField(this, 'Please select a service time')">
 
