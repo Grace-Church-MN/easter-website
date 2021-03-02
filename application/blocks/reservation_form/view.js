@@ -301,7 +301,7 @@ function submit(){
 	}
 
 	if((val == 'eg' && validES && validGF) || (val == 'e' && validES) || (val == 'g' && validGF)){
-		console.log(send);
+		//console.log(send);
 		let sendTemp = {data:send};
 		document.getElementById('submitButton').disabled = true;
 		$.post('https://us-central1-grace-church-161321.cloudfunctions.net/api/forms/submit/vo887dEdCz5hCQzbf5ns', sendTemp).done(function( res ) {
