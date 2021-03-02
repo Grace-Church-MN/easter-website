@@ -297,7 +297,7 @@ function submit(){
 		console.log(send);
 		let sendTemp = {data:send};
 		document.getElementById('submitButton').disabled = true;
-		$.post('https://us-central1-grace-church-161321.cloudfunctions.net/api/forms/submit/vo887dEdCz5hCQzbf5ns', send).done(function( res ) {
+		$.post('https://us-central1-grace-church-161321.cloudfunctions.net/api/forms/submit/vo887dEdCz5hCQzbf5ns', sendTemp).done(function( res ) {
 			if(res.success){
 				window.location.href = reservationFormRedirectURL;
 			} else {
