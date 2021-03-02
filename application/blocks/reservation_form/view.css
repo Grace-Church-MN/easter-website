@@ -1,5 +1,14 @@
-.message {
-	padding: 1em 0em 1em 0em;
+.title{
+	font-size: 1em;
+	font-weight: bold;
+}
+.checkbox{
+	display: flex;
+	align-items: center;
+	margin: 0 0 0 0;
+}
+.checkbox span{
+	font-size: .9em;
 }
 .mbsc-row.submit .mbsc-col-12 {
 	display: flex;

@@ -1,9 +1,9 @@
-<?php 
+<?php
 	defined('C5_EXECUTE') or die(_("Access Denied."));
 
 	function build_http_query($query, $allowed_keys) {
 		$query_array = [];
-	
+
 		$i = 0;
 		foreach($query as $key => $value) {
 			$i++;
@@ -14,7 +14,7 @@
 		}
 
 		if (count($query_array) > 0) array_unshift($query_array, '?');
-	
+
 		return implode('', $query_array);
 	}
 
@@ -52,38 +52,93 @@
 					</label>
 				</div>
 			</div>
-			<div class="mbsc-row">
-				<div class="mbsc-col-12 mbsc-col-md-6">
-					<label>
-						Location
-						<select id="Campus" onChange="setServiceTime(), resetServiceTime(), validateField(this, 'Please select a location')">
-							<option disabled selected value></option>
-							<option value="EP">Eden Prairie - Auditorium</option>
-							<option value="Chapel">Eden Prairie - Chapel</option>
-							<option value="CH">Chaska - Auditorium</option>
-						</select>
-					</label>
-				</div>
-				<div class="mbsc-col-12 mbsc-col-md-6">
-					<label>
-						Service Time
-						<select id="ServiceTime" onChange="getCount(), validateField(this, 'Please select a service time')">
-
-						</select>
-					</label>
+			<div id="ServiceSelect">
+				<div class="mbsc-row">
+					<div class="mbsc-col-12 mbsc-col-md-6">
+						<label>
+							Which service would you like to attend?
+							<select id="ServiceSelection" onChange="setFields(this.value), validateField(this, 'Please select a Service')">
+								<option disabled selected value></option>
+								<option value="eg">Easter and Good Friday</option>
+								<option value="e">Easter Only</option>
+								<option value="g">Good Friday Only</option>
+							</select>
+						</label>
+					</div>
 				</div>
 			</div>
-			<div class="mbsc-row">
-				<div class="mbsc-col-12">
-					<label>
-						<input id="Count" mbsc-stepper value="1" min="1" max="1" step="1" >
-							Number of people in your party?
-							<span class="mbsc-desc" id="countMessage"></span>
-						</input>
-					</label>
+			<div hidden="true" id="EasterSundayReservation">
+				<span class="title">Easter Sunday Reservation</span>
+				<div class="mbsc-row">
+					<div class="mbsc-col-12 mbsc-col-md-6">
+						<label>
+							Location
+							<select id="CampusEasterSunday" onChange="setServiceTime('ES'), resetServiceTime('ES'), validateField(this, 'Please select a location')">
+								<option disabled selected value></option>
+								<option value="EP">Eden Prairie Auditorium</option>
+								<option value="Chapel">Eden Prairie Chapel</option>
+								<option value="CH">Chaska Auditorium</option>
+							</select>
+						</label>
+					</div>
+					<div class="mbsc-col-12 mbsc-col-md-6">
+						<label>
+							Service Time
+							<select id="ServiceTimeEasterSunday" onChange="getCount('ES'), validateField(this, 'Please select a service time')">
+
+							</select>
+						</label>
+					</div>
+				</div>
+				<div id="KidsMessageEasterSunday" class="checkbox">
+				</div>
+				<div class="mbsc-row">
+					<div class="mbsc-col-12">
+						<label>
+							<input id="CountEasterSunday" mbsc-stepper value="1" min="1" max="1" step="1" >
+								Number of people in your party?
+								<span class="mbsc-desc" id="CountMessageEasterSunday"></span>
+							</input>
+						</label>
+					</div>
 				</div>
 			</div>
+			<div hidden="true" id="GoodFridayReservation">
+				<span class="title">Good Friday Reservation</span>
+				<div class="mbsc-row">
+					<div class="mbsc-col-12 mbsc-col-md-6">
+						<label>
+							Location
+							<select id="CampusGoodFriday" onChange="setServiceTime('GF'), resetServiceTime('GF'), validateField(this, 'Please select a location')">
+								<option disabled selected value></option>
+								<option value="EP">Eden Prairie Auditorium</option>
+								<option value="CH">Chaska Auditorium</option>
+							</select>
+						</label>
+					</div>
+					<div class="mbsc-col-12 mbsc-col-md-6">
+						<label>
+							Service Time
+							<select id="ServiceTimeGoodFriday" onChange="getCount('GF'), validateField(this, 'Please select a service time')">
 
+							</select>
+						</label>
+					</div>
+				</div>
+				<div id="KidsMessageGoodFriday" class="checkbox">
+
+				</div>
+				<div class="mbsc-row">
+					<div class="mbsc-col-12">
+						<label>
+							<input id="CountGoodFriday" mbsc-stepper value="1" min="1" max="1" step="1" >
+								Number of people in your party?
+								<span class="mbsc-desc" id="CountMessageGoodFriday"></span>
+							</input>
+						</label>
+					</div>
+				</div>
+			</div>
 			<div class="submit mbsc-row">
 				<div class="mbsc-col-12">
 					<label>
