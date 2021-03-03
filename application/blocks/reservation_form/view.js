@@ -154,7 +154,7 @@ function setServiceTime(service){
 		select.disabled = true;
 	}
 	if(serviceMessageValid){
-		document.getElementById(serviceMessage).querySelector('.mbsc-label').innerHTML = "Service Time (*Kids Ministry Available for Ages 0-5)"
+		document.getElementById(serviceMessage).querySelector('.mbsc-label').innerHTML = `Service Time <div class="sub-message">(*Kids Ministry Available for Ages 0-5)</div>`
 	} else {
 		document.getElementById(serviceMessage).querySelector('.mbsc-label').innerHTML = "Service Time"
 	}
