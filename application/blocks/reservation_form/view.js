@@ -162,6 +162,7 @@ function getCount(service) {
 	countMessage = ((service == 'ES') ? 'CountMessageEasterSunday' : 'CountMessageGoodFriday');
 	campus = ((service == 'ES') ? 'CampusEasterSunday' : 'CampusGoodFriday');
 	kidsMessageElement = ((service == 'ES') ? 'KidsMessageEasterSunday' : 'KidsMessageGoodFriday');
+	kidsMessageElementLower = ((service == 'ES') ? 'KidsMessageEasterSundayLower' : 'KidsMessageGoodFridayLower');
 	kidsMessageCheckBox = ((service == 'ES') ? 'KidsMessageCheckboxEasterSunday' : 'KidsMessageCheckboxGoodFriday');
 	if(document.getElementById(count).value && document.getElementById(serviceTime).value != "") {
 		let newdate = moment(list.get(document.getElementById(serviceTime).value).time).format() + "_" + list.get(document.getElementById(serviceTime).value).name;
@@ -188,8 +189,10 @@ function getCount(service) {
 	}
 	if(document.getElementById(serviceTime).value != '' && list.get(document.getElementById(serviceTime).value).kids){
 		document.getElementById(kidsMessageElement).innerHTML = `<label><input id='${kidsMessageCheckBox}' mbsc-checkbox type="checkbox"></label><span>I have kids ages 0-5 and require assistance reserving their spot on the Grace App.</span>`
+		document.getElementById(kidsMessageElementLower).hidden = false;
 	} else {
 		document.getElementById(kidsMessageElement).innerHTML = "";
+		document.getElementById(kidsMessageElementLower).hidden = true;
 	}
 }
 

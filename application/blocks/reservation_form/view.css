@@ -14,6 +14,10 @@
 	display: inline;
 	opacity: .6;
 }
+.kids-message{
+	padding: 1em 0em 0em 1em;
+	font-weight: bold;
+}
 .mbsc-row.submit .mbsc-col-12 {
 	display: flex;
 	flex-direction: row;

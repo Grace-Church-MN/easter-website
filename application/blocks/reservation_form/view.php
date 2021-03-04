@@ -92,6 +92,7 @@
 				</div>
 				<div id="KidsMessageEasterSunday" class="checkbox">
 				</div>
+				<div id="KidsMessageEasterSundayLower" class="kids-message">Have kids ages 0-5? Reserve their spot in the Check-In section on the Grace Church app.</div>
 				<div class="mbsc-row">
 					<div class="mbsc-col-12">
 						<label>
@@ -128,6 +129,7 @@
 				<div id="KidsMessageGoodFriday" class="checkbox">
 
 				</div>
+				<div id="KidsMessageGoodFridayLower" class="kids-message">Have kids ages 0-5? Reserve their spot in the Check-In section on the Grace Church app.</div>
 				<div class="mbsc-row">
 					<div class="mbsc-col-12">
 						<label>
